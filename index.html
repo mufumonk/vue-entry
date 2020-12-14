@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>OverVue</title>
+    <style>
+      span.complete {
+        text-decoration: line-through;
+      }
+      span.incomplete {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      {{message}}
+      <span v-if="visible">This is hidden</span>
+      <ol>
+        <li v-for="item in items">
+          <span :class="{complete: item.complete, incomplete: !item.complete}">
+            {{item.text}}
+          </span>
+        </li>
+      </ol>
+      <p>{{count}}</p>
+      <button @click="addOne">+1</button>
+      <button @click="minOne">-1</button>
+      <input type="text" v-model="count" />
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "hello world",
+          visible: false,
+          items: [
+            { text: "learn vue", complete: true },
+            { text: "learn vue1", complete: false },
+            { text: "learn vue2", complete: false },
+            { text: "learn vue3", complete: true },
+          ],
+          count: 0,
+        },
+        methods: {
+          addOne: function () {
+            this.count += 1;
+          },
+
+          minOne: function () {
+            this.count -= 1;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
